@@ -8,7 +8,7 @@
  * Controller of the websiteApp
  */
 angular.module('websiteApp')
-  .controller('StaffCtrl', function () {
+  .controller('StaffCtrl', function ($scope,StaffMgr) {
     /*$http.get('/views/employees.json').success(function(data){
     $scope.employees = data;
     });*/
@@ -26,7 +26,8 @@ angular.module('websiteApp')
 
   }];
     $scope.AddEmployee = function(){
-      var parameters = {"Name": "GG", "Handphone": "90038003", "Email": "gg@gmail.com"};
+      var parameters = StaffMgr.createEmployee("name","number","email");
+      console.log(parameters);
       $scope.employeeDetails.push(parameters);
     };
   });
