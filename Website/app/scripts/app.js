@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('websiteApp', ['ngRoute'])
+  .module('websiteApp', ['ngRoute','ui.bootstrap','ngAnimate','ui.bootstrap.tpls'])
   .config(['$routeProvider', '$locationProvider',
 	  function($routeProvider, $locationProvider) {
 	    $routeProvider

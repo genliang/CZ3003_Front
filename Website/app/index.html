@@ -21,7 +21,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
+    <div>
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -40,7 +40,7 @@
             <ul class="nav navbar-nav">
               <li><a href="#/schedule">Scheduler</a></li>
               <li><a ng-href="#/staff">Manage Staff</a></li>
-              <li><a ng-href="#/export">Export</a></li>
+              <li><a ng-href="#/export">Reports</a></li>
             </ul>
             <div class="navbar-btn navbar-right btn-group">
               <button type="button" class="btn btn-default">Logout</button>
@@ -71,6 +71,8 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -83,6 +85,12 @@
         <script src="scripts/controllers/account.js"></script>
         <script src="scripts/services/staffmgr.js"></script>
         <script src="scripts/services/datamgr.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/services/schedulemgr.js"></script>
+        <script src="scripts/services/acctmgr.js"></script>
+        <script src="scripts/services/scheduleexpt.js"></script>
+        <script src="scripts/services/reportgen.js"></script>
+        <script src="scripts/controllers/scheduleform.js"></script>
         <!-- endbuild -->
 </body>
 </html>
