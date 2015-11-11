@@ -14,6 +14,9 @@ angular.module('websiteApp')
     "Name":"JJ Lin",
     "Handphone":"90018001",
     "Email":"jjlin@gmail.com",
+    "Gender":"Male",
+    "Team": "Team A",
+    "Password": "123456",
     "Edit":false
 
   },
@@ -21,9 +24,16 @@ angular.module('websiteApp')
     "Name":"ABC Towkay",
     "Handphone":"88888888",
     "Email":"towkay@gmail.com",
+    "Gender":"Male",
+    "Team": "Team B",
+    "Password": "password",
     "Edit":false
 
   }];
+    var teams = ["Team A", "Morning Shift"];
+    //var teamswithDefault = teams;
+    var teamswithDefault = teams.slice();
+    teamswithDefault.push("No team");
 
     var editIndex = [];
 
@@ -32,12 +42,16 @@ angular.module('websiteApp')
       this.editTrue = true;
     };
 
-    var Employee = function(name, contact, email){
+    var Employee = function(name, contact, email, gender, team, password){
       this.Name = name;
       this.Handphone = contact;
       this.Email = email;
+      this.Gender = gender;
+      this.Team = team;
+      this.Password = password;
       this.Edit = false;
-      DataMgr.addEmployee(name,contact,email);
+      console.log(gender);
+      //DataMgr.addEmployee(name,contact,email);
     };
     Employee.prototype.editName = function(new_name) {
       this.Name = new_name;
@@ -51,8 +65,8 @@ angular.module('websiteApp')
     };
     // Public API here
     return {
-      createEmployee: function (name,contact,email) {
-        return new Employee(name,contact,email);
+      createEmployee: function (name, contact, email, gender, team, password) {
+        return new Employee(name, contact, email, gender, team, password);
       },
       getEmployeeList: function(){
         return employeeDetails;
@@ -88,6 +102,23 @@ angular.module('websiteApp')
             employeeDetails.splice(i,1);
           }
         }
+      },
+      getTeams: function (){
+        return teams;
+      },
+      getTeamsWithDefault: function(){
+        return teamswithDefault;
+      },
+      addTeam: function (name) {
+        teams.push(name);
+        teamswithDefault.push(name);
+      },
+
+      removeTeam: function (name) {
+        var index = teams.indexOf(name);
+        var index2 = teamswithDefault.indexOf(name);
+        teams.splice(index, 1);
+        teamswithDefault.splice(index2, 1);
       }
 
     };

@@ -1,56 +1,119 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Handphone</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input ng-model="name" type="name" class="form-control" id="exampleInputEmail1" placeholder="Name"></td>
-      <td><input ng-model="tel" type="tel" class="form-control" id="exampleInputEmail1" placeholder="Contact"></td>
-      <td><input ng-model="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></td>
-      <td>
-        <button type="submit" class="btn btn-default" ng-click="AddEmployee(name,tel,email)">
+<uib-tabset>
+  <uib-tab heading="employee">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Handphone</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Team</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input ng-model="employeeInput.name" type="name" class="form-control" id="exampleInputEmail1" placeholder="Name"></td>
+          <td><input ng-model="employeeInput.tel" type="tel" class="form-control" id="exampleInputEmail1" placeholder="Contact"></td>
+          <td><input ng-model="employeeInput.email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></td>
+          <td>          
+            <select class="form-control" ng-options="gender for gender in genders" ng-model="employeeInput.selectGender" id="gender">
+          
+            </select>
+          </td>
+          <td>
+            <select class="form-control" ng-options="team for team in teamsWithDefault" ng-model="employeeInput.selectTeam" id="team">
+            </select>
 
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Employee
-        </button>
-      </td>
-    </tr>
-    <tr ng-repeat="employee in employeeDetails">
-	    <td ng-if="!(employee.Edit)">{{employee.Name}}</td>
-      <td ng-if="employee.Edit">
-        <input ng-model="employee.Name" type="name" class="form-control" id="exampleInputEmail1">
-      </td>
-      <td ng-if="!(employee.Edit)">{{employee.Handphone}}</td>
-      <td ng-if="employee.Edit">
-        <input ng-model="employee.Handphone" type="tel" class="form-control" id="exampleInputEmail1" placeholder={{employee.Handphone}}>
-      </td>
-      <td ng-if="!(employee.Edit)">{{employee.Email}}</td>
-      <td ng-if="employee.Edit">
-        <input ng-model="employee.Email" type="email" class="form-control" id="exampleInputEmail1" placeholder={{employee.Email}}>
-      </td>
-      
-      <td>
-        <button type="button" class="btn btn-default" ng-click="EditEmployee(employee.Name)" ng-hide="employee.Edit">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-        </button>
-        <button type="button" class="btn btn-default" ng-show="employee.Edit" ng-click="SaveEmployee(employee.Name, employee.Handphone, employee.Email)">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
-        </button>
-        <button type="button" class="btn btn-default" ng-click="RemoveEmployee(employee.Name)">
-          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete
-        </button>
-      </td>
-      
-      <!--<td ng-show="EditTrue($index)">
-        <button type="button" class="btn btn-default">Right</button>
-      </td>-->
-    </tr>
-    <tr ng-show=>
-    </tr>
-    
-  </tbody>
-</table>
+          </td>
+          <td><input ng-model="employeeInput.password" type="name" class="form-control" id="exampleInputEmail1" placeholder="Password"></td>
+          <td>
+            <button type="submit" class="btn btn-default" ng-click="AddEmployee()">
 
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Employee
+            </button>
+          </td>
+        </tr>
+        <tr ng-repeat="employee in employeeDetails | orderBy:sortType:sortReverse">
+    	    <td ng-if="!(employee.Edit)">{{employee.Name}}</td>
+          <td ng-if="employee.Edit">
+            <input ng-model="employee.Name" type="name" class="form-control" id="exampleInputEmail1">
+          </td>
+          <td ng-if="!(employee.Edit)">{{employee.Handphone}}</td>
+          <td ng-if="employee.Edit">
+            <input ng-model="employee.Handphone" type="tel" class="form-control" id="exampleInputEmail1" placeholder={{employee.Handphone}}>
+          </td>
+          <td ng-if="!(employee.Edit)">{{employee.Email}}</td>
+          <td ng-if="employee.Edit">
+            <input ng-model="employee.Email" type="email" class="form-control" id="exampleInputEmail1" placeholder={{employee.Email}}>
+          </td>
+          <td ng-if="!(employee.Edit)">{{employee.Gender}}</td>
+          <td ng-if="employee.Edit">
+            <select class="form-control" id="gender" ng-model="employee.gender" ng-option="employee.">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </td>
+          <td ng-if="!(employee.Edit)">{{employee.Team}}</td>
+          <td ng-if="employee.Edit">
+            <select class="form-control" ng-model="selectTeam" id="team">
+              <option ng-repeat="team in teamsWithDefault" value="{{team}}">{{team}}</option>
+            </select>
+          </td>
+          <td ng-if="!(employee.Edit)">{{employee.Password}}</td>
+          <td ng-if="employee.Edit">
+            <input ng-model="employee.Password" type="password" class="form-control" id="exampleInputEmail1" placeholder={{employee.Password}}>
+          </td>
+          <td>
+            <button type="button" class="btn btn-default" ng-click="EditEmployee(employee.Name)" ng-hide="employee.Edit">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+            </button>
+            <button type="button" class="btn btn-default" ng-show="employee.Edit" ng-click="SaveEmployee(employee.Name, employee.Handphone, employee.Email)">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
+            </button>
+            <button type="button" class="btn btn-default" ng-click="RemoveEmployee(employee.Name)">
+              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete
+            </button>
+          </td>
+          
+          <!--<td ng-show="EditTrue($index)">
+            <button type="button" class="btn btn-default">Right</button>
+          </td>-->
+        </tr>
+        <tr ng-show=>
+        </tr>
+        
+      </tbody>
+    </table>
+  </uib-tab>
+  <uib-tab heading="team">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Team</th>
+
+        </tr>
+        <tbody>
+          <tr>
+            <td>
+              <input ng-model="teamName.team" type="name" class="form-control" id="exampleInputEmail1" placeholder="Team Name">
+            </td>
+            <td>
+              <button type="submit" class="btn btn-default" ng-click="AddTeam(teamName.team)">
+
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Team
+            </button>
+            </td>
+          </tr>
+          <tr ng-repeat="team in teams">
+            <td>{{team}}<td>
+            <td><button type="button" class="btn btn-default" ng-click="RemoveTeam(team)">
+              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete
+            </button>
+          </td>
+          </tr>
+        </tbody>
+      </thead>
+    </table>
+  </uib-tab>
+</uib-tabset>

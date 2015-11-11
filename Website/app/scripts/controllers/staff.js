@@ -13,12 +13,45 @@ angular.module('websiteApp')
     $scope.employees = data;
     });*/
     $scope.employeeDetails = StaffMgr.getEmployeeList();
-  
-    $scope.AddEmployee = function(name, contact, email){
+    $scope.teams = StaffMgr.getTeams();
+    $scope.teamsWithDefault = StaffMgr.getTeamsWithDefault();
+    $scope.teamName = {
+      team: ''
+    };
+    $scope.genders = ["Male", "Female"];
+
+    $scope.employeeInput = {
+      name: '',
+      tel: '',
+      email: '',
+      selectGender: 'Male',
+      selectTeam: 'No team',
+      password: ''
+    };
+
+    $scope.sortType = 'Team';
+    $scope.sortReverse = false;
+
+    var copy = $scope.employeeInput;
+    $scope.AddEmployee = function(){
       //$scope.employeeDetails = StaffMgr.getEmployeeList();
-      var parameters = StaffMgr.createEmployee(name, contact, email);
+      console.log($scope.employeeInput);
+      var parameters = StaffMgr.createEmployee(
+        copy.name, 
+        copy.tel, 
+        copy.email, 
+        copy.selectGender,
+        copy.selectTeam, 
+        copy.password);
+      
       console.log(parameters);
       $scope.employeeDetails.push(parameters);
+      $scope.employeeInput.name = '';
+      $scope.employeeInput.tel = '';
+      $scope.employeeInput.email = '';
+      $scope.employeeInput.selectGender = 'Male';
+      $scope.employeeInput.selectTeam ='No team';
+      $scope.employeeInput.password = ''; 
     };
 
 
@@ -40,5 +73,18 @@ angular.module('websiteApp')
       //$scope.iseditable = false;
       StaffMgr.saveEmployee(name, tel, email);
     };
+
+    $scope.AddTeam = function (name) {
+      StaffMgr.addTeam(name);
+      $scope.teamName.team = '';
+      
+    };
+
+    $scope.RemoveTeam = function(name){
+      StaffMgr.removeTeam(name);
+    };
+
+
+
   });
 
